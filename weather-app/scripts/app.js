@@ -7,7 +7,7 @@ const icon = document.querySelector('.icon img');
 
 const updateUI = data => {
 
-
+        console.log(data)
     // const cityDets = data.cityDets;
     // const weather = data.weather;
 
@@ -76,4 +76,16 @@ cityForm.addEventListener('submit', e => {
         .then(data => updateUI(data))
         .catch(err => console.log(err));
 
+
+    //set local storage
+    localStorage.setItem('city', city)
 });
+
+if(localStorage.getItem('city')) {
+    //update the ui with new city
+    updateCity(localStorage.getItem('city'))
+    .then(data => updateUI(data))
+    .catch(err => console.log(err));
+
+
+}
