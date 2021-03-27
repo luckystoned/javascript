@@ -4,10 +4,10 @@ const card = document.querySelector('.card');
 const details = document.querySelector('.details');
 const time = document.querySelector('img.time');
 const icon = document.querySelector('.icon img');
+const forecast = new Forecast();
 
 const updateUI = data => {
 
-        console.log(data)
     // const cityDets = data.cityDets;
     // const weather = data.weather;
 
@@ -49,20 +49,21 @@ const updateUI = data => {
 
 };
 
-const updateCity = async city => {
+// script using funcitons
+// const updateCity = async city => {
 
-    const cityDets = await getCity(city)
-    const weather = await getWeather(cityDets.Key)
+//     const cityDets = await getCity(city)
+//     const weather = await getWeather(cityDets.Key)
 
-    //return {
-        //cityDets: cityDets,
-        //weather: weather
-    //}
+//     return {
+//         cityDets: cityDets,
+//         weather: weather
+//     }
 
-    //shorthand notation
-    return {cityDets, weather}
+//     //shorthand notation
+//     return {cityDets, weather}
 
-};
+// };
 
 cityForm.addEventListener('submit', e => {
     // prevent defaul action
@@ -72,7 +73,7 @@ cityForm.addEventListener('submit', e => {
     const city = cityForm.city.value.trim();
 
     //update the ui with new city
-    updateCity(city)
+    forecast.updateCity(city)
         .then(data => updateUI(data))
         .catch(err => console.log(err));
 
@@ -83,9 +84,7 @@ cityForm.addEventListener('submit', e => {
 
 if(localStorage.getItem('city')) {
     //update the ui with new city
-    updateCity(localStorage.getItem('city'))
+    forecast.updateCity(localStorage.getItem('city'))
     .then(data => updateUI(data))
     .catch(err => console.log(err));
-
-
 }
